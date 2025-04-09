@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.screen.auth.login.LoginActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_login"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="header_login.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/tv_label_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lav_login" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_username"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_label_username"
+        app:startIconDrawable="@drawable/ic_username">
+
+        <com.mufti.test.storeapps.ui.component.UsernameEditText
+            android:id="@+id/ed_login_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text|textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+     <TextView
+         android:id="@+id/tv_label_password"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="32dp"
+         android:layout_marginTop="16dp"
+         android:text="@string/password"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/til_login_username" />
+
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/til_login_password"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="32dp"
+         android:layout_marginEnd="32dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/tv_label_password"
+         app:passwordToggleEnabled="true"
+         app:startIconDrawable="@drawable/ic_lock_24">
+
+         <com.mufti.test.storeapps.ui.component.PasswordEditText
+             android:id="@+id/ed_login_password"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:ems="10"
+             android:inputType="textPassword"
+             app:passwordToggleEnabled="true" />
+     </com.google.android.material.textfield.TextInputLayout>
+
+     <Button
+         android:id="@+id/btn_login"
+         android:layout_width="0dp"
+         android:layout_height="64dp"
+         android:layout_marginStart="32dp"
+         android:layout_marginTop="32dp"
+         android:layout_marginEnd="32dp"
+         android:backgroundTint="?colorPrimary"
+         android:text="@string/login"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
+
+
+     <ProgressBar
+         android:id="@+id/pg_login"
+         style="?android:attr/progressBarStyle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:visibility="gone"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

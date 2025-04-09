@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">Store Apps</string>
+    <string name="copyright">© Story App 2025 - Mufti Alie S</string>
+
+    <!-- Input Hint-->
+    <string name="input_hint_username">Input your Username</string>
+    <string name="input_hint_email">Input your Email</string>
+    <string name="input_hint_password">Input your Password</string>
+
+    <!-- Alert Input-->
+    <string name="alert_invalid_username">Username can\'t Empty</string>
+    <string name="alert_invalid_email">Email format invalid</string>
+    <string name="alert_invalid_password">Password less than 8 characters</string>
+    <string name="alert_empty_username">Username is required</string>
+    <string name="alert_empty_email">Email is required</string>
+    <string name="alert_empty_password">Password is required</string>
+
+    <!-- Message -->
+    <string name="message_complete_register">Account successfully registered</string>
+    <string name="message_complete_login">Account successfully logged in</string>
+    <string name="message_to_register">Don\'t have an account?</string>
+
+    <string name="alert_button_ok">OK</string>
+    <string name="alert_button_yes">Yes</string>
+    <string name="alert_button_no">No</string>
+
+    <string name="alert_invalid_login">Incorrect Username or Password, Please try again</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="error">Error</string>
 </resources>
