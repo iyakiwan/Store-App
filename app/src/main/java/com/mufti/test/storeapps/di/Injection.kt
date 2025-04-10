@@ -20,7 +20,7 @@ object Injection {
         return StoreRepository.getInstance(
             apiService = apiService,
             dataStore = dataStore,
-            productDao = productDao,
+            storeDao = productDao,
         )
     }
 }

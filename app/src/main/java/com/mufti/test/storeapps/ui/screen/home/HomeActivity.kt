@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mufti.test.storeapps.data.Result
 import com.mufti.test.storeapps.databinding.ActivityHomeBinding
+import com.mufti.test.storeapps.ui.screen.cart.CartActivity
 import com.mufti.test.storeapps.ui.screen.product.ProductAdapter
 import com.mufti.test.storeapps.ui.screen.product.category.CategoryProductBottomSheetDialog
 import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductActivity
@@ -68,6 +69,11 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager,
                     bottomSheetDialogFragment.tag
                 )
+            }
+
+            ivCart.setOnClickListener {
+                val intent = Intent(this@HomeActivity, CartActivity::class.java)
+                startActivity(intent)
             }
 
             ivFilterCategory.setOnClickListener {

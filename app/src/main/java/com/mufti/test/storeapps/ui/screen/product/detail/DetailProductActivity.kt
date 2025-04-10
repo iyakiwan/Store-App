@@ -9,11 +9,12 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mufti.test.storeapps.R
-import com.mufti.test.storeapps.databinding.ActivityDetailProductBinding
-import com.mufti.test.storeapps.utils.ViewModelFactory
-import com.mufti.test.storeapps.utils.extension.ActivityExtension.okAlertDialog
 import com.mufti.test.storeapps.data.Result
+import com.mufti.test.storeapps.databinding.ActivityDetailProductBinding
 import com.mufti.test.storeapps.domain.model.Product
+import com.mufti.test.storeapps.utils.ViewModelFactory
+import com.mufti.test.storeapps.utils.extension.ActivityExtension.alertDialog
+import com.mufti.test.storeapps.utils.extension.ActivityExtension.okAlertDialog
 
 class DetailProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailProductBinding
@@ -31,6 +32,7 @@ class DetailProductActivity : AppCompatActivity() {
         setupViewModel()
 
         getArgument()
+        setupView()
 
         observeDetailProduct()
         getDetailStory()
@@ -59,6 +61,37 @@ class DetailProductActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupView() {
+        binding.apply {
+            ivBack.setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
+
+            ivAddCart.setOnClickListener {
+                if (idProduct.isNotEmpty()) {
+                    alertDialog(
+                        title = getString(R.string.alert_title_add_cart),
+                        message = getString(R.string.alert_message_add_cart),
+                        positiveButtonText = getString(R.string.alert_button_yes),
+                        onPositiveButtonPressed = {
+                            viewModel.addToCart(idProduct.toInt())
+                            //TODO: Add Toast Berhasil
+                            finish()
+                        },
+                        negativeButtonText = getString(R.string.alert_button_no)
+                    )
+
+                } else {
+                    okAlertDialog(
+                        title = getString(R.string.alert_title_product_not_found),
+                        message = getString(R.string.alert_message_product_not_found),
+                        positiveButtonText = getString(R.string.alert_button_ok)
+                    )
+                }
+            }
+        }
+    }
+
     private fun getDetailStory() {
         if (idProduct.isNotEmpty()) {
             viewModel.getDetailProduct(idProduct.toInt())
@@ -84,7 +117,7 @@ class DetailProductActivity : AppCompatActivity() {
                 is Result.Success -> {
                     binding.pgDetailProduct.isVisible = false
                     binding.groupDetailProduct.isVisible = true
-                    setupView(it.data)
+                    setupDetailProduct(it.data)
                 }
 
                 is Result.Error -> {
@@ -99,7 +132,7 @@ class DetailProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupView(data: Product) {
+    private fun setupDetailProduct(data: Product) {
         binding.apply {
             Glide.with(this@DetailProductActivity).load(data.image).into(ivDetailPhoto)
             tvDetailPrice.text = getString(R.string.label_price, data.price.toString())

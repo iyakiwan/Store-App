@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mufti.test.storeapps.data.local.entity.CartEntity
 import com.mufti.test.storeapps.data.local.entity.ProductEntity
-import com.mufti.test.storeapps.data.local.room.dao.ProductDao
 
-@Database(entities = [ProductEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ProductEntity::class, CartEntity::class], version = 1, exportSchema = false)
 abstract class StoreDatabase : RoomDatabase() {
-    abstract fun productDao(): ProductDao
+    abstract fun productDao(): StoreDao
 
     companion object {
         @Volatile

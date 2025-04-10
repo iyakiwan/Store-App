@@ -22,9 +22,11 @@
     <string name="alert_button_no">No</string>
     <string name="alert_invalid_login">Incorrect Username or Password, Please try again</string>
 
-    <!-- Alert Logout-->
     <string name="alert_title_logout">Confirmation</string>
     <string name="alert_message_logout">Are you sure you want to exit?</string>
+
+    <string name="alert_title_add_cart">Add to Cart?</string>
+    <string name="alert_message_add_cart">Are you sure you want to add this product to your shopping cart?</string>
 
     <string name="alert_title_product_not_found">Not Found</string>
     <string name="alert_message_product_not_found">Product Not Found</string>
@@ -35,13 +37,15 @@
     <string name="logout">Log Out</string>
     <string name="register">Register</string>
     <string name="error">Error</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="total_price">Total</string>
 
     <string name="dummy_username">kevinryan</string>
     <string name="dummy_password">kev02937@</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_cart">Cart</string>
     <string name="title_profile">Profile</string>
     <string name="category">Category</string>
