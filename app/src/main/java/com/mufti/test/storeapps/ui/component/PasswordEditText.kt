@@ -18,17 +18,13 @@ class PasswordEditText @JvmOverloads constructor(
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().isNotEmpty() && !isValidPassword(s.toString())) error =
+                if (s.toString().isEmpty()) error =
                     context.getString(R.string.alert_invalid_password)
             }
 
             override fun afterTextChanged(s: Editable?) {}
 
         })
-    }
-
-    private fun isValidPassword(password: CharSequence): Boolean {
-        return password.length >= 8
     }
 
     override fun onDraw(canvas: Canvas) {

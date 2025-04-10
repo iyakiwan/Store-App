@@ -1,7 +1,7 @@
 package com.mufti.test.storeapps.ui.screen.auth.login
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +12,7 @@ import com.mufti.test.storeapps.utils.constant.HttpCodeConstant
 import com.mufti.test.storeapps.R
 import com.mufti.test.storeapps.databinding.ActivityLoginBinding
 import com.mufti.test.storeapps.data.Result
+import com.mufti.test.storeapps.ui.screen.home.HomeActivity
 import com.mufti.test.storeapps.utils.ViewModelFactory
 import com.mufti.test.storeapps.utils.extension.ActivityExtension.okAlertDialog
 import com.mufti.test.storeapps.utils.extension.ActivityExtension.showToast
@@ -32,10 +33,6 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         observeValidInput()
         observeLogin()
-
-        viewModel.getTokenUser().observe(this) { token ->
-            Log.d("Token User", token)
-        }
     }
 
     private fun setupWindow() {
@@ -102,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
                 is Result.Success -> {
                     binding.pgLogin.isVisible = false
                     showToast(getString(R.string.message_complete_login))
-//                    launchHomeActivity()
+                    launchHomeActivity()
                 }
 
                 is Result.Error -> {
@@ -128,9 +125,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun launchHomeActivity() {
+    private fun launchHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-    }*/
+    }
 }

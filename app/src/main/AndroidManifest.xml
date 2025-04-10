@@ -15,6 +15,9 @@
         android:theme="@style/Theme.StoreApps"
         tools:targetApi="31">
         <activity
+            android:name=".ui.screen.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.screen.auth.login.LoginActivity"
             android:exported="false" />
         <activity

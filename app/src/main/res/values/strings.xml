@@ -4,15 +4,12 @@
 
     <!-- Input Hint-->
     <string name="input_hint_username">Input your Username</string>
-    <string name="input_hint_email">Input your Email</string>
     <string name="input_hint_password">Input your Password</string>
 
     <!-- Alert Input-->
     <string name="alert_invalid_username">Username can\'t Empty</string>
-    <string name="alert_invalid_email">Email format invalid</string>
-    <string name="alert_invalid_password">Password less than 8 characters</string>
+    <string name="alert_invalid_password">Password can\'t Empty</string>
     <string name="alert_empty_username">Username is required</string>
-    <string name="alert_empty_email">Email is required</string>
     <string name="alert_empty_password">Password is required</string>
 
     <!-- Message -->
@@ -23,12 +20,22 @@
     <string name="alert_button_ok">OK</string>
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_no">No</string>
-
     <string name="alert_invalid_login">Incorrect Username or Password, Please try again</string>
+
+    <!-- Alert Logout-->
+    <string name="alert_title_logout">Confirmation</string>
+    <string name="alert_message_logout">Are you sure you want to exit?</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="logout">Log Out</string>
     <string name="register">Register</string>
     <string name="error">Error</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_profile">Profile</string>
 </resources>

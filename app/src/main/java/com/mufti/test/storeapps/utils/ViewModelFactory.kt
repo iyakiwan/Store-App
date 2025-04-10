@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mufti.test.storeapps.data.StoreRepository
 import com.mufti.test.storeapps.di.Injection
+import com.mufti.test.storeapps.ui.screen.auth.first.FirstViewModel
 import com.mufti.test.storeapps.ui.screen.auth.login.LoginViewModel
+import com.mufti.test.storeapps.ui.screen.home.HomeViewModel
+import com.mufti.test.storeapps.ui.screen.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val repository: StoreRepository
@@ -15,6 +18,12 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(FirstViewModel::class.java)) {
+            return FirstViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+            return ProfileViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            return HomeViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

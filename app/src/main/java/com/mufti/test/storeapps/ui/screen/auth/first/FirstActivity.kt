@@ -8,12 +8,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.mufti.test.storeapps.R
+import androidx.lifecycle.ViewModelProvider
 import com.mufti.test.storeapps.databinding.ActivityFirstBinding
 import com.mufti.test.storeapps.ui.screen.auth.login.LoginActivity
+import com.mufti.test.storeapps.ui.screen.home.HomeActivity
+import com.mufti.test.storeapps.utils.ViewModelFactory
 
 class FirstActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFirstBinding
+    private lateinit var viewModel: FirstViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,6 +25,7 @@ class FirstActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupWindow()
+        setupViewModel()
 
         showSplashScreen()
     }
@@ -33,15 +38,26 @@ class FirstActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupViewModel() {
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
+
+        viewModel = ViewModelProvider(
+            this, factory
+        )[FirstViewModel::class.java]
+    }
+
     private fun showSplashScreen() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            /*if (viewModel.getIsLogin()) {
-                startActivity(Intent(this@FirstActivity, HomeActivity::class.java))
-            } else {*/
-                startActivity(Intent(this@FirstActivity, LoginActivity::class.java))
-//            }
-            finish()
-        }, SPLASH_TIME_OUT)
+        viewModel.getLoginUser().observe(this) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (it.isLogin) {
+                    startActivity(Intent(this@FirstActivity, HomeActivity::class.java))
+                } else {
+                    startActivity(Intent(this@FirstActivity, LoginActivity::class.java))
+                }
+                finish()
+            }, SPLASH_TIME_OUT)
+        }
+
     }
 
     companion object {

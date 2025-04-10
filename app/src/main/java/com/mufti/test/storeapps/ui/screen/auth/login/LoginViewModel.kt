@@ -42,6 +42,4 @@ class LoginViewModel(private val repository: StoreRepository) : ViewModel() {
             _login.value = repository.login(request)
         }
     }
-
-    fun getTokenUser() = repository.getTokenUser().asLiveData()
 }

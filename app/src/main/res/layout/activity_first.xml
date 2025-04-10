@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.screen.auth.first.FirstActivity">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -30,7 +30,7 @@
         app:lottie_fileName="store_welcome.json"
         app:lottie_loop="true" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
