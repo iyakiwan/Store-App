@@ -13,15 +13,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mufti.test.storeapps.data.Result
 import com.mufti.test.storeapps.databinding.ActivityHomeBinding
 import com.mufti.test.storeapps.ui.screen.product.ProductAdapter
+import com.mufti.test.storeapps.ui.screen.product.category.CategoryProductBottomSheetDialog
 import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductActivity
 import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductActivity.Companion.INTENT_ID_PRODUCT
 import com.mufti.test.storeapps.ui.screen.profile.ProfileBottomSheetDialogFragment
 import com.mufti.test.storeapps.utils.ViewModelFactory
+import com.mufti.test.storeapps.utils.constant.CategoryProductType
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var viewModel: HomeViewModel
     private val adapter by lazy { ProductAdapter() }
+
+    private var categoryProductType = CategoryProductType.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,7 @@ class HomeActivity : AppCompatActivity() {
         setupView()
 
         observerListProduct()
+        observerCategoryProduct()
         getProducts()
     }
 
@@ -62,6 +67,20 @@ class HomeActivity : AppCompatActivity() {
                 bottomSheetDialogFragment.show(
                     supportFragmentManager,
                     bottomSheetDialogFragment.tag
+                )
+            }
+
+            ivFilterCategory.setOnClickListener {
+                val dialog = CategoryProductBottomSheetDialog.newInstance(
+                    selectedCategoryProductType = categoryProductType
+                )
+                dialog.setOnCategoryProductSelected {
+                    viewModel.setCategoryProduct(it)
+                    rvProduct.scrollToPosition(0)
+                }
+                dialog.show(
+                    supportFragmentManager,
+                    dialog.tag
                 )
             }
         }
@@ -98,6 +117,12 @@ class HomeActivity : AppCompatActivity() {
                     Toast.makeText(this@HomeActivity, it.error, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun observerCategoryProduct() {
+        viewModel.categoryType.observe(this) {
+            categoryProductType = it
         }
     }
 

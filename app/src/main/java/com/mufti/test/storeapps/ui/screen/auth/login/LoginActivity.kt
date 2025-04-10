@@ -55,6 +55,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             validateInput()
         }
+
+        binding.lavLogin.setOnClickListener {
+            binding.edLoginUsername.setText(getString(R.string.dummy_username))
+            binding.edLoginPassword.setText(getString(R.string.dummy_password))
+        }
     }
 
     private fun validateInput() {

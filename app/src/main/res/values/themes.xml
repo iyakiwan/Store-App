@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.StoreApps" parent="Base.Theme.StoreApps" />
+
+    <style name="OutlineAppCompatButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_outline</item>
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:padding">16dp</item>
+    </style>
 </resources>

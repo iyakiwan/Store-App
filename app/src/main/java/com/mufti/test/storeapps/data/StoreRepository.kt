@@ -3,15 +3,19 @@ package com.mufti.test.storeapps.data
 import android.util.Log
 import com.mufti.test.storeapps.data.local.datastore.DataStorePreferences
 import com.mufti.test.storeapps.data.local.datastore.LoggedInUser
+import com.mufti.test.storeapps.data.local.room.dao.ProductDao
 import com.mufti.test.storeapps.data.remote.mapper.ProductMapper
 import com.mufti.test.storeapps.data.remote.request.auth.LoginRequest
 import com.mufti.test.storeapps.data.remote.retrofit.ApiService
 import com.mufti.test.storeapps.domain.model.Product
+import com.mufti.test.storeapps.utils.constant.CategoryProductType
+import com.mufti.test.storeapps.utils.filter.FilterUtils
 import retrofit2.HttpException
 
 class StoreRepository private constructor(
     private val apiService: ApiService,
     private val dataStore: DataStorePreferences,
+    private val productDao: ProductDao,
 ) {
     suspend fun login(
         request: LoginRequest
@@ -39,12 +43,16 @@ class StoreRepository private constructor(
         dataStore.saveLoginUser(userLogin)
     }
 
-    suspend fun getListProduct() : Result<List<Product>> {
+    suspend fun getListProduct(): Result<List<Product>> {
         return try {
             val response = apiService.getListProduct()
-            val dataResult = ProductMapper.mapListProductResponseToListProduct(response)
+            val dataResult = ProductMapper.mapListProductResponseToListProductEntity(response)
 
-            Result.Success(dataResult)
+            productDao.deleteAllProduct()
+
+            productDao.insertProduct(dataResult)
+
+            Result.Success(ProductMapper.mapListProductEntityToListProduct(productDao.getAllProduct()))
         } catch (e: HttpException) {
             Log.d("StoreRepository", "getListProduct: ${e.message.toString()} ")
             Result.Error(code = e.code(), error = e.message.toString())
@@ -54,9 +62,21 @@ class StoreRepository private constructor(
         }
     }
 
+    fun getFilterProduct(categoryType: CategoryProductType): Result<List<Product>> {
+        return try {
+            val query = FilterUtils.getCategoryQuery(categoryType)
+            val dataResult = productDao.getFilterProduct(query)
+            Result.Success(ProductMapper.mapListProductEntityToListProduct(dataResult))
+        } catch (e: Exception) {
+            Log.d("StoreRepository", "getFilterProduct: ${e.message.toString()} ")
+            Result.Error(error = e.message.toString())
+        }
+    }
+
+
     suspend fun getDetailProduct(
         idProduct: Int
-    ) : Result<Product> {
+    ): Result<Product> {
         return try {
             val response = apiService.getDetailProduct(idProduct)
             val dataResult = ProductMapper.mapProductResponseToProduct(response)
@@ -78,9 +98,10 @@ class StoreRepository private constructor(
         fun getInstance(
             apiService: ApiService,
             dataStore: DataStorePreferences,
+            productDao: ProductDao
         ): StoreRepository {
             return INSTANCE ?: synchronized(this) {
-                val instance = StoreRepository(apiService, dataStore)
+                val instance = StoreRepository(apiService, dataStore, productDao)
                 INSTANCE = instance
                 instance
             }
