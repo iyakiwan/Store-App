@@ -15,7 +15,7 @@
             android:id="@+id/iv_item_photo"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,21 +33,37 @@
             android:maxLines="2"
             android:minLines="2"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_photo"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Title Product" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_item_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_star"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_photo"
-            tools:text="Name Of User" />
+            app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
+            tools:text="$ 1000" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_star"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_item_rating"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_price"
             app:layout_constraintEnd_toStartOf="@+id/tv_item_rating"
-            app:layout_constraintTop_toTopOf="@+id/tv_item_rating"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_price"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_star_yellow_24"
             tools:ignore="RedundantDescriptionCheck" />
@@ -58,9 +74,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_item_name"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_price"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_item_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_price"
             tools:text="4.5" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

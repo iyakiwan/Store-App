@@ -42,7 +42,24 @@ class StoreRepository private constructor(
     suspend fun getListProduct() : Result<List<Product>> {
         return try {
             val response = apiService.getListProduct()
-            val dataResult = ProductMapper.mapListUserEntityToListUser(response)
+            val dataResult = ProductMapper.mapListProductResponseToListProduct(response)
+
+            Result.Success(dataResult)
+        } catch (e: HttpException) {
+            Log.d("StoreRepository", "getListProduct: ${e.message.toString()} ")
+            Result.Error(code = e.code(), error = e.message.toString())
+        } catch (e: Exception) {
+            Log.d("StoreRepository", "getListProduct: ${e.message.toString()} ")
+            Result.Error(error = e.message.toString())
+        }
+    }
+
+    suspend fun getDetailProduct(
+        idProduct: Int
+    ) : Result<Product> {
+        return try {
+            val response = apiService.getDetailProduct(idProduct)
+            val dataResult = ProductMapper.mapProductResponseToProduct(response)
 
             Result.Success(dataResult)
         } catch (e: HttpException) {

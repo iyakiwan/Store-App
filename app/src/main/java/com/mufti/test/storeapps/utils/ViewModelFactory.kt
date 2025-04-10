@@ -8,6 +8,7 @@ import com.mufti.test.storeapps.di.Injection
 import com.mufti.test.storeapps.ui.screen.auth.first.FirstViewModel
 import com.mufti.test.storeapps.ui.screen.auth.login.LoginViewModel
 import com.mufti.test.storeapps.ui.screen.home.HomeViewModel
+import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductViewModel
 import com.mufti.test.storeapps.ui.screen.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
@@ -24,6 +25,8 @@ class ViewModelFactory private constructor(
             return ProfileViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             return HomeViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(DetailProductViewModel::class.java)) {
+            return DetailProductViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

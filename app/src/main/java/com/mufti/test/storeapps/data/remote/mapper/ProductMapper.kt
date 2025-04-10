@@ -5,7 +5,7 @@ import com.mufti.test.storeapps.domain.model.Product
 
 object ProductMapper {
 
-    fun mapListUserEntityToListUser(listProductResponse: List<ProductResponse>): List<Product> {
+    fun mapListProductResponseToListProduct(listProductResponse: List<ProductResponse>): List<Product> {
         val users = ArrayList<Product>()
 
         listProductResponse.map {
@@ -23,5 +23,19 @@ object ProductMapper {
             )
         }
         return users
+    }
+
+    fun mapProductResponseToProduct(productResponse: ProductResponse): Product {
+        return Product(
+            id = productResponse.id ?: 0,
+            title = productResponse.title.orEmpty(),
+            description = productResponse.description.orEmpty(),
+            price = productResponse.price ?: 0.0,
+            image = productResponse.image.orEmpty(),
+            category = productResponse.category.orEmpty(),
+            ratingRate = productResponse.rating?.rate?.toString() ?: "0.0",
+            ratingCount = productResponse.rating?.count ?: 0,
+        )
+
     }
 }

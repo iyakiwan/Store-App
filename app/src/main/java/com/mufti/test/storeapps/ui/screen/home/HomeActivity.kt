@@ -1,5 +1,6 @@
 package com.mufti.test.storeapps.ui.screen.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -9,11 +10,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.mufti.test.storeapps.data.Result
 import com.mufti.test.storeapps.databinding.ActivityHomeBinding
 import com.mufti.test.storeapps.ui.screen.product.ProductAdapter
+import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductActivity
+import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductActivity.Companion.INTENT_ID_PRODUCT
 import com.mufti.test.storeapps.ui.screen.profile.ProfileBottomSheetDialogFragment
 import com.mufti.test.storeapps.utils.ViewModelFactory
-import com.mufti.test.storeapps.data.Result
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -70,6 +73,12 @@ class HomeActivity : AppCompatActivity() {
         binding.rvProduct.setHasFixedSize(true)
         binding.rvProduct.layoutManager = GridLayoutManager(this, 2)
         binding.rvProduct.adapter = adapter
+
+        adapter.setOnProductSelected { product ->
+            val intent = Intent(this, DetailProductActivity::class.java)
+            intent.putExtra(INTENT_ID_PRODUCT, product.id.toString())
+            startActivity(intent)
+        }
     }
 
     private fun observerListProduct() {

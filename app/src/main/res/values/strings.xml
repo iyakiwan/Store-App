@@ -26,6 +26,9 @@
     <string name="alert_title_logout">Confirmation</string>
     <string name="alert_message_logout">Are you sure you want to exit?</string>
 
+    <string name="alert_title_product_not_found">Not Found</string>
+    <string name="alert_message_product_not_found">Product Not Found</string>
+
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -38,4 +41,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_cart">Cart</string>
     <string name="title_profile">Profile</string>
+    <string name="category">Category</string>
+    <string name="description_product">Description Product</string>
+    <string name="label_price">$%s</string>
+    <string name="label_rating">%s (%s)</string>
 </resources>

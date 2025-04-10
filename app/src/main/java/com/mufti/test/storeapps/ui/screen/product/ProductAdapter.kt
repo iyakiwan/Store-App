@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mufti.test.storeapps.R
 import com.mufti.test.storeapps.databinding.ItemRowProductBinding
 import com.mufti.test.storeapps.domain.model.Product
 
 class ProductAdapter : ListAdapter<Product, ProductAdapter.ListViewHolder>(diffCallback) {
+
+    private var onProductSelected: (Product) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding =
@@ -19,20 +22,35 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ListViewHolder>(diffC
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val user = getItem(position)
-        holder.bind(user)
+        holder.bind(user, onProductSelected)
     }
 
     class ListViewHolder(private var binding: ItemRowProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
-            Glide.with(binding.root)
-                .load(product.image)
-                .into(binding.ivItemPhoto)
+        fun bind(
+            product: Product,
+            onProductSelected: (Product) -> Unit
+        ) {
+            binding.apply {
+                Glide.with(root)
+                    .load(product.image)
+                    .into(ivItemPhoto)
 
-            binding.tvItemName.text = product.title
-            binding.tvItemRating.text = product.ratingRate
+                tvItemPrice.text =
+                    root.context.getString(R.string.label_price, product.price.toString())
+                tvItemName.text = product.title
+                tvItemRating.text = product.ratingRate
+
+                root.setOnClickListener {
+                    onProductSelected(product)
+                }
+            }
         }
+    }
+
+    fun setOnProductSelected(onProductSelected: (Product) -> Unit) {
+        this.onProductSelected = onProductSelected
     }
 
     companion object {
