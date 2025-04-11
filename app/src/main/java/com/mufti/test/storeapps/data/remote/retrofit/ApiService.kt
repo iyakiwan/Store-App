@@ -6,7 +6,6 @@ import com.mufti.test.storeapps.data.remote.response.auth.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface ApiService {
 
@@ -15,7 +14,4 @@ interface ApiService {
 
     @GET("/products")
     suspend fun getListProduct(): List<ProductResponse>
-
-    @GET("/products/{id}")
-    suspend fun getDetailProduct(@Path("id") id: Int): ProductResponse
 }
