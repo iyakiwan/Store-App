@@ -135,7 +135,7 @@ class DetailProductActivity : AppCompatActivity() {
     private fun setupDetailProduct(data: Product) {
         binding.apply {
             Glide.with(this@DetailProductActivity).load(data.image).into(ivDetailPhoto)
-            tvDetailPrice.text = getString(R.string.label_price, data.price.toString())
+            tvDetailPrice.text = getString(R.string.label_price, data.price)
             tvDetailTitle.text = data.title
             tvDetailRating.text =
                 getString(R.string.label_rating, data.ratingRate, data.ratingCount.toString())

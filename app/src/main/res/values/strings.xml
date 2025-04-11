@@ -44,20 +44,24 @@
     <string name="dummy_username">kevinryan</string>
     <string name="dummy_password">kev02937@</string>
 
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_cart">Cart</string>
-    <string name="title_profile">Profile</string>
-    <string name="category">Category</string>
-    <string name="description_product">Description Product</string>
-    <string name="label_price">$%s</string>
-    <string name="label_rating">%s (%s)</string>
-
     <string name="category_product">Category Product</string>
     <string name="category_1">Men\'s Clothing</string>
     <string name="category_2">Jewelery</string>
     <string name="category_3">Electronics</string>
     <string name="category_4">Women\'s Clothing</string>
     <string name="category_all">Show All</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_profile">Profile</string>
+    <string name="category">Category</string>
+    <string name="description_product">Description Product</string>
+    <string name="label_price">$ %.2f</string>
+    <string name="label_rating">%s (%s)</string>
+    <string name="label_checkout">%.2f x %s</string>
+
+    <string name="total_payment">Total Payment</string>
+    <string name="total_item">Total Item</string>
 
 </resources>

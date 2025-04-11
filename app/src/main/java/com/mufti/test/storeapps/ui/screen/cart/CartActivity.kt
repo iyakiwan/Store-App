@@ -1,5 +1,6 @@
 package com.mufti.test.storeapps.ui.screen.cart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mufti.test.storeapps.R
 import com.mufti.test.storeapps.databinding.ActivityCartBinding
 import com.mufti.test.storeapps.domain.model.Cart
+import com.mufti.test.storeapps.ui.screen.checkout.CheckoutActivity
 import com.mufti.test.storeapps.utils.ViewModelFactory
 
 class CartActivity : AppCompatActivity() {
@@ -54,6 +56,10 @@ class CartActivity : AppCompatActivity() {
             ivBack.setOnClickListener {
                 onBackPressedDispatcher.onBackPressed()
             }
+            btnCheckout.setOnClickListener {
+                val intent = Intent(this@CartActivity, CheckoutActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         setupRecyclerView()
@@ -93,7 +99,7 @@ class CartActivity : AppCompatActivity() {
     private fun totalPrice(listCart: List<Cart>) {
         val totalPrice = listCart.sumOf { it.product.price * it.quantity }
         binding.tvTotalPrice.text = if (totalPrice > 0) {
-            getString(R.string.label_price, totalPrice.toString())
+            getString(R.string.label_price, totalPrice)
         } else {
             "-"
         }

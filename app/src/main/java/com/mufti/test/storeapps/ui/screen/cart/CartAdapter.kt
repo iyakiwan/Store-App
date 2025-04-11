@@ -24,8 +24,8 @@ class CartAdapter : ListAdapter<Cart, CartAdapter.ListViewHolder>(diffCallback) 
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user, onAddQuantityCard, onMinusQuantityCard)
+        val cart = getItem(position)
+        holder.bind(cart, onAddQuantityCard, onMinusQuantityCard)
     }
 
     class ListViewHolder(private var binding: ItemRowCartBinding) :
@@ -52,7 +52,7 @@ class CartAdapter : ListAdapter<Cart, CartAdapter.ListViewHolder>(diffCallback) 
                     .into(ivItemPhoto)
 
                 tvItemPrice.text =
-                    root.context.getString(R.string.label_price, cart.product.price.toString())
+                    root.context.getString(R.string.label_price, cart.product.price)
                 tvItemName.text = cart.product.title
 
                 chipItemQuantity.text = cart.quantity.toString()

@@ -21,8 +21,8 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ListViewHolder>(diffC
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val user = getItem(position)
-        holder.bind(user, onProductSelected)
+        val product = getItem(position)
+        holder.bind(product, onProductSelected)
     }
 
     class ListViewHolder(private var binding: ItemRowProductBinding) :
@@ -38,7 +38,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ListViewHolder>(diffC
                     .into(ivItemPhoto)
 
                 tvItemPrice.text =
-                    root.context.getString(R.string.label_price, product.price.toString())
+                    root.context.getString(R.string.label_price, product.price)
                 tvItemName.text = product.title
                 tvItemRating.text = product.ratingRate
 
