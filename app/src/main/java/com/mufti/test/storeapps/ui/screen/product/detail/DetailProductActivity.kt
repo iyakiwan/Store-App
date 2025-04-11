@@ -9,11 +9,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mufti.test.storeapps.R
-import com.mufti.test.storeapps.data.Result
 import com.mufti.test.storeapps.databinding.ActivityDetailProductBinding
 import com.mufti.test.storeapps.domain.model.Product
+import com.mufti.test.storeapps.ui.screen.product.add.AddCartBottomSheetDialog
 import com.mufti.test.storeapps.utils.ViewModelFactory
-import com.mufti.test.storeapps.utils.extension.ActivityExtension.alertDialog
 import com.mufti.test.storeapps.utils.extension.ActivityExtension.okAlertDialog
 
 class DetailProductActivity : AppCompatActivity() {
@@ -34,8 +33,7 @@ class DetailProductActivity : AppCompatActivity() {
         getArgument()
         setupView()
 
-        observeDetailProduct()
-        getDetailStory()
+        getDetailProduct()
     }
 
     private fun setupWindow() {
@@ -69,18 +67,8 @@ class DetailProductActivity : AppCompatActivity() {
 
             ivAddCart.setOnClickListener {
                 if (idProduct.isNotEmpty()) {
-                    alertDialog(
-                        title = getString(R.string.alert_title_add_cart),
-                        message = getString(R.string.alert_message_add_cart),
-                        positiveButtonText = getString(R.string.alert_button_yes),
-                        onPositiveButtonPressed = {
-                            viewModel.addToCart(idProduct.toInt())
-                            //TODO: Add Toast Berhasil
-                            finish()
-                        },
-                        negativeButtonText = getString(R.string.alert_button_no)
-                    )
-
+                    val dialog = AddCartBottomSheetDialog.newInstance(idProduct)
+                    dialog.show(supportFragmentManager, dialog.tag)
                 } else {
                     okAlertDialog(
                         title = getString(R.string.alert_title_product_not_found),
@@ -92,9 +80,9 @@ class DetailProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDetailStory() {
+    private fun getDetailProduct() {
         if (idProduct.isNotEmpty()) {
-            viewModel.getDetailProduct(idProduct.toInt())
+            observeDetailProduct()
         } else {
             okAlertDialog(
                 title = getString(R.string.alert_title_product_not_found),
@@ -107,28 +95,10 @@ class DetailProductActivity : AppCompatActivity() {
     }
 
     private fun observeDetailProduct() {
-        viewModel.product.observe(this) {
-            when (it) {
-                is Result.Loading -> {
-                    binding.pgDetailProduct.isVisible = true
-                    binding.groupDetailProduct.isVisible = false
-                }
-
-                is Result.Success -> {
-                    binding.pgDetailProduct.isVisible = false
-                    binding.groupDetailProduct.isVisible = true
-                    setupDetailProduct(it.data)
-                }
-
-                is Result.Error -> {
-                    binding.pgDetailProduct.isVisible = false
-                    okAlertDialog(
-                        title = getString(R.string.error),
-                        message = it.error,
-                        positiveButtonText = getString(R.string.alert_button_ok)
-                    )
-                }
-            }
+        viewModel.detailProduct(this.idProduct.toInt()).observe(this) {
+            binding.pgDetailProduct.isVisible = false
+            binding.groupDetailProduct.isVisible = true
+            setupDetailProduct(it)
         }
     }
 

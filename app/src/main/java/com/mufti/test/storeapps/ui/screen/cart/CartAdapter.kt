@@ -1,10 +1,7 @@
 package com.mufti.test.storeapps.ui.screen.cart
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.mufti.test.storeapps.R
 import com.mufti.test.storeapps.databinding.ItemRowCartBinding
 import com.mufti.test.storeapps.domain.model.Cart
+import com.mufti.test.storeapps.utils.extension.HelperDrawable.getDrawableCompat
 
 class CartAdapter : ListAdapter<Cart, CartAdapter.ListViewHolder>(diffCallback) {
     private var onAddQuantityCard: (Cart) -> Unit = {}
@@ -30,10 +28,6 @@ class CartAdapter : ListAdapter<Cart, CartAdapter.ListViewHolder>(diffCallback) 
 
     class ListViewHolder(private var binding: ItemRowCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        private fun getDrawableCompat(context: Context, drawableResId: Int): Drawable? {
-            return ContextCompat.getDrawable(context, drawableResId)
-        }
 
         fun bind(
             cart: Cart,

@@ -27,12 +27,21 @@ interface StoreDao {
     @RawQuery(observedEntities = [ProductEntity::class])
     fun getFilterProduct(query: SupportSQLiteQuery): List<ProductEntity>
 
+    @Query("SELECT * FROM products WHERE id = :id")
+    suspend fun getProductById(id: Int): ProductEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCart(cart: CartEntity)
 
     @Transaction
     @Query("SELECT * from carts")
     fun getAllCartAndProduct(): LiveData<List<CartAndProduct>>
+
+    @Query("SELECT quantity FROM carts WHERE product_id = :productId")
+    suspend fun getCartQuantity(productId: Int): Int?
+
+    @Query("UPDATE carts SET quantity = :quantity WHERE product_id = :productId")
+    suspend fun updateCartQuantityByProductId(productId: Int, quantity: Int)
 
     @Query("UPDATE carts SET quantity = :quantity WHERE id = :cartId")
     suspend fun updateCartQuantity(cartId: Int, quantity: Int)

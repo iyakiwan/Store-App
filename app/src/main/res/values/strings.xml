@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Store Apps</string>
-    <string name="copyright">© Story App 2025 - Mufti Alie S</string>
+    <string name="copyright">© Store App 2025 - Mufti Alie S</string>
 
     <!-- Input Hint-->
     <string name="input_hint_username">Input your Username</string>
@@ -63,5 +63,10 @@
 
     <string name="total_payment">Total Payment</string>
     <string name="total_item">Total Item</string>
+
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="update_to_cart">Update to Cart</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="updated_to_cart">Updated to cart</string>
 
 </resources>

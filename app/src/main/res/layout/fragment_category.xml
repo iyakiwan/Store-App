@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -29,7 +29,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/gl_category"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:strokeColor="?colorPrimary" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -44,7 +44,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/gl_category"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:strokeColor="?colorPrimary" />
 
     <androidx.appcompat.widget.AppCompatButton

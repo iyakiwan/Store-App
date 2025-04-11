@@ -10,6 +10,7 @@ import com.mufti.test.storeapps.ui.screen.auth.login.LoginViewModel
 import com.mufti.test.storeapps.ui.screen.cart.CartViewModel
 import com.mufti.test.storeapps.ui.screen.checkout.CheckoutViewModel
 import com.mufti.test.storeapps.ui.screen.home.HomeViewModel
+import com.mufti.test.storeapps.ui.screen.product.add.AddCartViewModel
 import com.mufti.test.storeapps.ui.screen.product.detail.DetailProductViewModel
 import com.mufti.test.storeapps.ui.screen.profile.ProfileViewModel
 
@@ -33,6 +34,8 @@ class ViewModelFactory private constructor(
             return CartViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(CheckoutViewModel::class.java)) {
             return CheckoutViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(AddCartViewModel::class.java)) {
+            return AddCartViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

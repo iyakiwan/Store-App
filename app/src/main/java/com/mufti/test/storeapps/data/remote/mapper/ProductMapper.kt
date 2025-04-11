@@ -32,20 +32,6 @@ object ProductMapper {
         return listProductEntity.map { it.toProduct() }
     }
 
-    fun mapProductResponseToProduct(productResponse: ProductResponse): Product {
-        return Product(
-            id = productResponse.id ?: 0,
-            title = productResponse.title.orEmpty(),
-            description = productResponse.description.orEmpty(),
-            price = productResponse.price ?: 0.0,
-            image = productResponse.image.orEmpty(),
-            category = productResponse.category.orEmpty(),
-            ratingRate = productResponse.rating?.rate?.toString() ?: "0.0",
-            ratingCount = productResponse.rating?.count ?: 0,
-        )
-
-    }
-
     fun CartAndProduct.toCart(): Cart {
         return Cart(
             id = this.cartEntity.id,
@@ -54,7 +40,7 @@ object ProductMapper {
         )
     }
 
-    private fun ProductEntity.toProduct(): Product {
+    fun ProductEntity.toProduct(): Product {
         return Product(
             image = this.image,
             price = this.price,
